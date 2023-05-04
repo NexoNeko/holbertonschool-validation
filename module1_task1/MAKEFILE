@@ -1,0 +1,12 @@
+POST_TITLE ?= new_post
+POST_NAME ?= New Post
+
+build:
+	hugo --source dist --destination public
+
+clean:
+	rm -rf public/*
+
+post:
+	hugo new posts/$(POST_TITLE).md
+	sed -i "s/title = \".*\"/title = \"$(POST_NAME)\"/g" content/posts/$(POST_TITLE).md
