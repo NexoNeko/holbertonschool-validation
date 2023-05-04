@@ -1,3 +1,5 @@
+SHELL := bash
+
 POST_TITLE ?= new_post
 POST_NAME ?= New Post
 
