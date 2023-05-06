@@ -4,7 +4,7 @@ build:
 clean:
 	@rm -rf dist/*
 
-new-post:
+post:
 	@hugo new posts/$(POST_NAME).md
 	@echo "---\n\
 	title: \"$(POST_TITLE)\"\n\
