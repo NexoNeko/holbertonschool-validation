@@ -1,6 +1,5 @@
 # Simple HTTP web server written in the Golang language.
 
----
 
 # Prerequisites
 
@@ -24,3 +23,5 @@ Same tools as previous module Golang in v1.15.* NPM v7+ with NodeJS v14.* (stabl
 "lint:" Check code for errors before building
 
 "help:" Displays the help message
+
+---
