@@ -7,9 +7,8 @@ This project needs the following tools / services:
 
 Same tools as previous module Golang in v1.15.* NPM v7+ with NodeJS v14.* (stable) Python 3 with pip module golangci-lint
 
----
 
-# Make targets 
+# Lifecycle
 “build”: compile the source code of the application to a binary named awesome-api (the name awesome-api comes from the command go mod init github.com/<your github handle>/awesome-api) with the command go build. The first build may takes some times.
 
 “run”: Run the application in background by executing the binary awesome-api, and write logs into a file named awesome-api.log with the command ./awesome-api >./awesome-api.log 2>&1 &.
