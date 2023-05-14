@@ -25,4 +25,6 @@ Same tools as previous module Golang in v1.15.* NPM v7+ with NodeJS v14.* (stabl
 
 "unit-tests:" Run UnitTests
 
+"integration-tests": Run integration tests
+
 ---

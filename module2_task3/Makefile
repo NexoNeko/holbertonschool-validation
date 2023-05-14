@@ -14,13 +14,17 @@ stop: ## Stop the application.
 
 clean: stop ## Stop the application. Delete the binary awesome-api and the log file awesome-api.log
 	@rm -f awesome-api/awesome-api awesome-api.log
+	@rm -f coverage_integrations.out coverage-units.out
 
 test: ## Tests ports 9999 and health
-	curl http://localhost:9999
-	curl http://localhost:9999/health
+	unit-tests integration-tests
 
 help: ## Show this help usage
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
 
 unit-tests: ## Run unittests
 	@go test -v -short -coverprofile=coverage-units.out
+	
+integration-tests: ## Run integration tests
+	@go test -v -coverprofile=coverage-integrations.out 
+
