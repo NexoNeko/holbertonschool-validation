@@ -21,3 +21,6 @@ test: ## Tests ports 9999 and health
 
 help: ## Show this help usage
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
+
+unit-tests: ## Run unittests
+	@go test -v -short -coverprofile=coverage-units.out
