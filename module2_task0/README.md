@@ -9,3 +9,5 @@
 “clean”: Stop the application. Delete the binary awesome-api and the log file awesome-api.log
 
 “test”: You want to test it to ensure that it behaves as expected. With the application started, you may want to use the command line curl (or your web browser, or the command wget or any other HTTP client)
+
+"help:" Displays the help message
