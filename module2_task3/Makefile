@@ -12,12 +12,12 @@ run: ## Run the application in the background by executing the binary awesome-ap
 stop: ## Stop the application.
 	@pkill awesome-api
 
-clean: stop ## Stop the application. Delete the binary awesome-api and the log file awesome-api.log
+clean: ## Stop the application. Delete the binary awesome-api and the log file awesome-api.log
 	@rm -f awesome-api/awesome-api awesome-api.log
 	@rm -f coverage_integrations.out coverage-units.out
 
-test: ## Tests ports 9999 and health
-	unit-tests integration-tests
+test: unit-tests integration-tests ## Tests ports 9999 and health
+	
 
 help: ## Show this help usage
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
