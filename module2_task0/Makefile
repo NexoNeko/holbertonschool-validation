@@ -1,3 +1,6 @@
+lint:
+	## Check for errors in the code before building
+	@golangci-lint run main.go
 build: go.sum
 	## Compile the source code of the application to a binary named awesome-api. The initial build might take some time.
 	@go build -o awesome-api main.go
@@ -20,5 +23,6 @@ test: awesome-api awesome-api.log
 	curl http://localhost:9999
 	curl http://localhost:9999/health
 
-help:	## Display usage information
+help:	
+	## Display usage information
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
