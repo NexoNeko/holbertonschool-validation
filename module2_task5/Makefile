@@ -1,7 +1,7 @@
 lint:	## Checks if code has no possible errors
 	@golangci-lint run main.go
 
-build: lint check	## Compile the source code of the application to a binary named awesome-api. The first build may take some time.
+build: lint	## Compile the source code of the application to a binary named awesome-api. The first build may take some time.
 	@hugo
 	@go build -o awesome-api/awesome-api main.go
 
