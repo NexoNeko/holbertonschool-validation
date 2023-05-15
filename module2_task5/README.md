@@ -1,32 +1,35 @@
 ## Prerequisites
 
-- Golang in v1.15.*
-- NPM v7+ with NodeJS v14.* (stable)
-- Python 3 with pip module
-- golangci-lint
+This project needs the following tools / services:
+
+Same tools as previous module
+Golang in v1.15.*
+NPM v7+ with NodeJS v14.* (stable)
+Python 3 with pip module
+golangci-lint
 
 ## Lifecycle
 
-"build": Compiles the source code of the application into a binary named awesome-api (the name awesome-api is derived from the command go mod init github.com/<your GitHub handle>/awesome-api) using the command go build. The initial build may take some time.
+build: compile the source code of the application to a binary named awesome-api (the name awesome-api comes from the command go mod init github.com/<your github handle>/awesome-api) with the command go build. The first build may takes some times.
+i
+run: Run the application in background by executing the binary awesome-api, and write logs into a file named awesome-api.log with the command ./awesome-api >./awesome-api.log 2>&1 &.
 
-"run": Executes the application in the background by running the binary awesome-api and writes logs to a file named awesome-api.log using the command ./awesome-api > ./awesome-api.log 2>&1 &.
+stop: Stop the application with the command kill XXXXX where XXXXX is the Process ID of the application. For instance: kill "$(pgrep awesome-api)".
 
-"stop": Terminates the application by killing the process identified by its Process ID (PID). For example: kill "$(pgrep awesome-api)".
+clean: Stop the application. Delete the binary awesome-api and the log file awesome-api.log
 
-"clean": Stops the application, deletes the binary awesome-api, and removes the log file awesome-api.log.
+test: exectue all tests
 
-"test": Executes all tests.
+help: Show this help usage
 
-"help": Displays usage instructions and help.
+lint: Check for no code errors
 
-"lint": Checks for any code errors.
+unit-tests: Ececute unittests
 
-"unit-tests": Executes unit tests.
+integration-tests: Execute integration tests
 
-"integration-tests": Executes integration tests.
+check: Check something, we don't know what.
 
-"check": Performs a check operation. The specific nature of the check is not defined.
+validate: Validate html's
 
-"validate": Validates HTML files.
-
-"post": Creates '.md' files inside 'content/posts' with the required attributes. Attributes: $POST_NAME, $POST_TITLE.
+post: Create the '.md' files inside 'content/posts' with the attibutes neded. Atts: $POST_NAME, $POST_TITLE

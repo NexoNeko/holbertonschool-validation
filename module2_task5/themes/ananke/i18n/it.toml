@@ -10,9 +10,6 @@ other = "Recenti {{.Title }}"
 [readMore]
 other = "leggi di più"
 
-[by]
-other = "Da"
-
 [whatsInThis]
 other = "Cosa c'è in {{ .Type }}"
 
@@ -36,6 +33,3 @@ other = "Invia"
 
 [taxonomyPageList]
 other = "Below you will find pages that utilize the taxonomy term “{{ .Title }}”"
-
-[pageTitle]
-other = "{{ .Name }} pagina"
