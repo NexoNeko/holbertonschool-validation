@@ -1,43 +1,49 @@
-lint: ##Checks if code have no possible errors
-	@golangci-lint run main.go
+lint: ## Fail when the linter catches an error
+	@markdownlint DEPLOY.md README.md
 
-build: lint check##Compile the source code of the application to a binary named awesome-api, The first build may takes some time.
+build: lint check ## Generate the website from the markdown and configuration files in the directory dist/
 	@hugo
-	@go build -o awesome-api/awesome-api main.go
+	@echo 'make lint'
+	@echo 'make unit-tests'
+	@echo 'make integration-tests'
+	@echo 'make validate'
 
-run: ##Run the application in background by executing the binary awesome-api, and write logs into a file named awesome-api.log.
-	@./awesome-api/awesome-api >./awesome-api.log 2>&1 &
+run: ## Run the application in background by executing the binary awesome-api
+	@./awesome-api >./awesome-api.log 2>&1 &
 
-stop: ##Stop the application.
-	@pkill awesome-api
-
-clean: ##Stop the application. Delete the binary awesome-api and the log file awesome-api.log 
-	@rm -f awesome-api/awesome-api awesome-api.log
-	@rm -f coverage_integrations.out coverage-units.out
-	@rm -rf dist/
-
-test: unit-tests integration-tests ##Tests ports 9999 and health
-
-unit-tests: ## Execute unittests
-	@go test -v -short -coverprofile=coverage-units.out
-
-integration-tests: ## Execute integration tests
-	@go test -v -coverprofile=coverage-integrations.out 
-
-post:## Create the '.md' files inside 'content/posts' with the attibutes neded. Atts: $POST_NAME, $POST_TITLE
+post: ## Create a new blog post whose filename and title come from the environment variables POST_TITLE and POST_NAME
 	@hugo new posts/$(POST_NAME).md
-	@echo "---\n\
-	title: \"$(POST_TITLE)\"\n\
-	date: $$(date +'%Y-%m-%dT%H:%M:%S%z')\n\
-	draft: true\n\
+	@echo "---\
+	title: '$(POST_TITLE)'\
+	date: $(date +"%Y-%m-%dT%H:%M:%S%z")\
 	---" > content/posts/$(POST_NAME).md
 
-check: ## Check something, we don't know what. 
-	@markdownlint content/posts/*.md
-	@markdown-link-check content/posts/*.md
+stop: ## Stop the application with the command kill XXXXX where XXXXX is the Process ID of the application
+	@pkill awesome-api
 
-validate: ## Validate html's
-	@python3 /opt/W3C-Validator/w3c_validator.py dist/index.html || true
+clean: ## Cleanup the content of the directory dist/ and awesome-api/awesome-api.log files
+	@rm -rf dist
+	@rm -f awesome-api awesome-api.log coverage-units.out coverage-integrations.out
+	@pkill awesome-api
 
-help:## Show this help usage
-	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//'
+test: unit-tests integration-tests validate ## Test it to ensure that it behaves as expected
+	
+
+help: ## Show this help usage
+	@awk -F ': ' '/^[^#].*: /{printf "  %-15s%s\n", $$1, $$2}' $(MAKEFILE_LIST)
+
+unit-tests: ## Execute the Golang unit tests
+	@go test -v -short -coverprofile=coverage-units.out
+
+integration-tests: ## Execute the Golang integration tests
+	@go test -v -coverprofile=coverage-integrations.out
+
+check: ## Succeed by default, and fail when presented with a dead link or a badly written Markdown file
+	@markdownlint ./content/posts/*
+	@markdown-link-check ./content/posts/*
+
+validate: ## Always succeed by default and should print the result on the stdout
+	@./W3C-Validator/w3c_validator.py ./dist/index.html || true
+
+package: ## Produces a file awesome-website.zip, containing the binary awesome-api and the directory dist/ directory
+	zip -r awesome-website awesome-api dist/

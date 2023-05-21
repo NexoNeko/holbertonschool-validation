@@ -1,35 +1,43 @@
 ## Prerequisites
 
-This project needs the following tools / services:
+-A Valid Go-Hugo website is provided
 
-Same tools as previous module
-Golang in v1.15.*
-NPM v7+ with NodeJS v14.* (stable)
-Python 3 with pip module
-golangci-lint
+-There are no Git Submodules
+
+-The theme ananke is installed
+
+-No directory dist/ committed
+
+-Makefile present
 
 ## Lifecycle
 
-build: compile the source code of the application to a binary named awesome-api (the name awesome-api comes from the command go mod init github.com/<your github handle>/awesome-api) with the command go build. The first build may takes some times.
-i
-run: Run the application in background by executing the binary awesome-api, and write logs into a file named awesome-api.log with the command ./awesome-api >./awesome-api.log 2>&1 &.
+- build: compile the source code of the application to a binary named awesome-api (the name awesome-api comes from the command go mod init github.com/<your github handle>/awesome-api) with the command go build. The first build may takes some times.
 
-stop: Stop the application with the command kill XXXXX where XXXXX is the Process ID of the application. For instance: kill "$(pgrep awesome-api)".
+- run: Run the application in background by executing the binary awesome-api, and write logs into a file named awesome-api.log with the command ./awesome-api >./awesome-api.log 2>&1 &.
 
-clean: Stop the application. Delete the binary awesome-api and the log file awesome-api.log
+- post: Create a new blog post whose filename and title come from the environment variables POST_TITLE and POST_NAME.
 
-test: exectue all tests
+- stop: Stop the application with the command pkill XXXXX where XXXXX is the binary name. For instance: pkill awesome-api.
 
-help: Show this help usage
+- clean: Stop the application. Delete the binary awesome-api and the log file awesome-api.log.
 
-lint: Check for no code errors
+- test: Test the application using unit and integration tests.
 
-unit-tests: Ececute unittests
+- help: Print a list of all the goals.
 
-integration-tests: Execute integration tests
+- lint: Fail when the linter catches an error.
 
-check: Check something, we don't know what.
+- unit-tests: Execute (successfully) the Golang unit tests.
 
-validate: Validate html's
+- integration-tests: Execute (successfully) the Golang integration tests.
 
-post: Create the '.md' files inside 'content/posts' with the attibutes neded. Atts: $POST_NAME, $POST_TITLE
+- check: Succeed by default, and fail when presented with a dead link or a badly written Markdown file
+
+- validate: Always succeed by default and should print the result on the stdout
+
+## Workflow
+
+- module3_task0: this workflow clones the repository, using ubuntu-22.04 as the virtual machine, and executes the command make help to validate that the Makefile is present and implements the help target. Its triggered:
+    Each time there is new code pushed on your repository,
+    And once per day (whatever time you want).
